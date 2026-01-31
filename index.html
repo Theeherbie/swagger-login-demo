@@ -2,15 +2,15 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Login Demo</title>
+  <title>Login Demo + Swagger PoC</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       background: #f4f6f8;
     }
     .container {
-      max-width: 400px;
-      margin: 80px auto;
+      max-width: 500px;
+      margin: 60px auto;
       background: #fff;
       padding: 25px;
       border-radius: 8px;
@@ -39,6 +39,14 @@
       font-size: 16px;
       cursor: pointer;
     }
+    .injected-content {
+      margin-top: 20px;
+      padding: 12px;
+      background: #fff3cd;
+      border: 1px solid #ffeeba;
+      border-radius: 4px;
+      color: #856404;
+    }
     .footer {
       position: fixed;
       bottom: 10px;
@@ -46,24 +54,14 @@
       font-size: 12px;
       color: #888;
     }
-    .injected-content {
-      margin-top: 15px;
-      padding: 12px;
-      background: #fff3cd;
-      border: 1px solid #ffeeba;
-      border-radius: 4px;
-      color: #856404;
-    }
   </style>
 </head>
 <body>
 
 <div class="container">
-  <div id="error" class="error">
-    Invalid credentials (Demo only)
-  </div>
+  <div id="error" class="error">Invalid credentials (Demo only)</div>
 
-  <h2 style="text-align:center;">Login (Demo)</h2>
+  <h2 style="text-align:center;">Login Demo</h2>
 
   <form onsubmit="return fakeLogin()">
     <label>Username</label>
@@ -75,17 +73,18 @@
     <button type="submit">Login</button>
   </form>
 
+  <!-- Simulated injected Swagger content -->
   <div id="injected" class="injected-content">
-    ⚠ This section simulates content injected via an external config (XSS/Phishing PoC)
+    ⚠ Demo: Injected Swagger UI content would appear here
   </div>
 
   <p style="font-size:12px;color:#666;margin-top:15px;">
-    ⚠ Demo page. No credentials are stored or transmitted.
+    ⚠ This is a safe demo. No credentials are stored or transmitted.
   </p>
 </div>
 
 <div class="footer">
-  Coffinxp~/.lostsec
+  TheeHerbie
 </div>
 
 <script>
@@ -96,38 +95,39 @@
 
     if (u === "admin" && p === "admin") {
       alert("✅ Login successful (Demo)");
-      showInjectedContent(true); // show injected content as "success"
+      renderInjectedContent(true);
     } else {
       document.getElementById("error").style.display = "block";
-      showInjectedContent(false); // show warning
+      renderInjectedContent(false);
     }
-    return false; // stop form submit
+    return false;
   }
 
-  // Simulate attacker-controlled content injection
-  function showInjectedContent(success) {
-    const container = document.getElementById("injected");
+  // Simulate rendering injected Swagger/OpenAPI JSON
+  function renderInjectedContent(success) {
+    const div = document.getElementById("injected");
     if(success){
-      container.innerHTML = "<b>✔ Example injected content:</b> Welcome admin! (Simulated configUrl injection)";
-      container.style.background = "#d4edda";
-      container.style.borderColor = "#c3e6cb";
-      container.style.color = "#155724";
+      div.innerHTML = "<b>✔ Example injected content:</b> Loaded OpenAPI endpoints:<ul>" +
+        "<li>/coord_trans - translate 3D coordinates</li>" +
+        "<li>/magephem - compute magnetic ephemeris</li></ul>" +
+        "<i>(Simulated configUrl JSON injection)</i>";
+      div.style.background = "#d4edda";
+      div.style.borderColor = "#c3e6cb";
+      div.style.color = "#155724";
     } else {
-      container.innerHTML = "⚠ Simulated injected content: Invalid login attempt";
-      container.style.background = "#fff3cd";
-      container.style.borderColor = "#ffeeba";
-      container.style.color = "#856404";
+      div.innerHTML = "⚠ Simulated injected content: Invalid login attempt";
+      div.style.background = "#fff3cd";
+      div.style.borderColor = "#ffeeba";
+      div.style.color = "#856404";
     }
   }
 
-  // Optional: simulate remote config XSS (safe demo)
-  // In a real bug report, this could show that Swagger UI renders HTML from JSON
+  // Optional: simulate external JSON injection safely
   function simulateConfigInjection() {
-    const injected = document.getElementById("injected");
-    injected.innerHTML += "<br><i>Example: <b>Injected HTML from attacker JSON</b></i>";
+    const div = document.getElementById("injected");
+    div.innerHTML += "<br><i>⚡ Loaded JSON endpoints safely (demo)</i>";
   }
 
-  // Call on load for demo
   simulateConfigInjection();
 </script>
 
