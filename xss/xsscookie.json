@@ -1,9 +1,9 @@
 {
-    "url": "https://raw.githubusercontent.com/coffinxp/swagger/refs/heads/main/xsscookie.yaml",
+    "url": "https://github.com/Theeherbie/swagger-login-demo/blob/main/xss/xsscookie.yaml",
     "urls": [
         {
-            "url": "https://raw.githubusercontent.com/coffinxp/swagger/refs/heads/main/xsscookie.yaml",
-            "name": "Coffinxp"
+            "url": "https://github.com/Theeherbie/swagger-login-demo/blob/main/xss/xsscookie.yaml",
+            "name": "TheeHerbie"
         }
     ]
 }
