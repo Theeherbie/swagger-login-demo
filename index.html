@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login Demo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+    }
+    .container {
+      max-width: 400px;
+      margin: 80px auto;
+      background: #fff;
+      padding: 25px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .error {
+      background: #f8d7da;
+      color: #721c24;
+      padding: 12px;
+      margin-bottom: 15px;
+      border-radius: 4px;
+      display: none;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      margin-bottom: 15px;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #28a745;
+      color: white;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .footer {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      font-size: 12px;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div id="error" class="error">
+    Invalid credentials (Demo only)
+  </div>
+
+  <h2 style="text-align:center;">Login (Demo)</h2>
+
+  <form onsubmit="return fakeLogin()">
+    <label>Username</label>
+    <input type="text" id="username" required>
+
+    <label>Password</label>
+    <input type="password" id="password" required>
+
+    <button type="submit">Login</button>
+  </form>
+
+  <p style="font-size:12px;color:#666;margin-top:15px;">
+    ⚠ Demo page. No credentials are stored or transmitted.
+  </p>
+</div>
+
+<div class="footer">
+  Coffinxp~/.lostsec
+</div>
+
+<script>
+  function fakeLogin() {
+    const u = document.getElementById("username").value;
+    const p = document.getElementById("password").value;
+
+    if (u === "admin" && p === "admin") {
+      alert("✅ Login successful (Demo)");
+    } else {
+      document.getElementById("error").style.display = "block";
+    }
+    return false; // stop form submit
+  }
+</script>
+
+</body>
+</html>
