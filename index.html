@@ -2,27 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Swagger Login Injection Demo</title>
+  <title>Fast Magnetic Ephemeris – Swagger UI</title>
+
+  <link rel="stylesheet" href="https://unpkg.com/swagger-ui-dist/swagger-ui.css" />
+
   <style>
     body {
-      font-family: Arial, sans-serif;
+      margin: 0;
       background: #f4f6f8;
-    }
-    .container {
-      max-width: 420px;
-      margin: 80px auto;
-      background: #fff;
-      padding: 25px;
-      border-radius: 8px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-    h2 {
-      text-align: center;
-    }
-    .note {
-      font-size: 12px;
-      color: #666;
-      margin-top: 15px;
     }
     .footer {
       position: fixed;
@@ -33,35 +20,30 @@
     }
   </style>
 </head>
+
 <body>
+  <div id="swagger-ui"></div>
 
-<div class="container">
-  <h2>Swagger UI Injection Demo</h2>
+  <div class="footer">
+    Theeherbie/.vetritec
+  </div>
 
-  <!-- Injected content will appear here -->
-  <div id="injected"></div>
+  <script src="https://unpkg.com/swagger-ui-dist/swagger-ui-bundle.js"></script>
+  <script src="https://unpkg.com/swagger-ui-dist/swagger-ui-standalone-preset.js"></script>
 
-  <p class="note">
-    ⚠ This page simulates how Swagger UI renders attacker‑controlled content from a remote config.json file.
-  </p>
-</div>
-
-<div class="footer">
-  Theeherbie/.vetritec
-</div>
-  
-<script>
-  fetch("config.json")
-    .then(response => response.json())
-    .then(data => {
-      document.getElementById("injected").innerHTML =
-        data.info.description;
-    })
-    .catch(err => {
-      document.getElementById("injected").innerHTML =
-        "<p style='color:red;'>Failed to load config.json</p>";
-    });
-</script>
-
+  <script>
+    fetch("config.json")
+      .then(res => res.json())
+      .then(config => {
+        SwaggerUIBundle({
+          ...config,
+          presets: [
+            SwaggerUIBundle.presets.apis,
+            SwaggerUIStandalonePreset
+          ],
+          layout: "StandaloneLayout"
+        });
+      });
+  </script>
 </body>
 </html>
