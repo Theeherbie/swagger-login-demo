@@ -1,9 +1,9 @@
 {
-  "url": "https://raw.githubusercontent.com/TheeHerbie/swagger-login-demo/main/xss/theeherbie-xss.yaml",
+  "url": "https://raw.githubusercontent.com/Theeherbie/swagger-login-demo/main/xss/theeherbie-xss.yaml",
   "urls": [
     {
-      "url": "https://raw.githubusercontent.com/TheeHerbie/swagger-login-demo/main/xss/theeherbie-xss.yaml",
-      "name": "TheeHerbie"
+      "url": "https://raw.githubusercontent.com/Theeherbie/swagger-login-demo/main/xss/theeherbie-xss.yaml",
+      "name": "Theeherbie XSS PoC"
     }
   ]
 }
