@@ -2,50 +2,27 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Login Demo + Swagger PoC</title>
+  <title>Swagger Login Injection Demo</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       background: #f4f6f8;
     }
     .container {
-      max-width: 500px;
-      margin: 60px auto;
+      max-width: 420px;
+      margin: 80px auto;
       background: #fff;
       padding: 25px;
       border-radius: 8px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
-    .error {
-      background: #f8d7da;
-      color: #721c24;
-      padding: 12px;
-      margin-bottom: 15px;
-      border-radius: 4px;
-      display: none;
+    h2 {
+      text-align: center;
     }
-    input {
-      width: 100%;
-      padding: 10px;
-      margin-top: 5px;
-      margin-bottom: 15px;
-    }
-    button {
-      width: 100%;
-      padding: 12px;
-      background: #28a745;
-      color: white;
-      border: none;
-      font-size: 16px;
-      cursor: pointer;
-    }
-    .injected-content {
-      margin-top: 20px;
-      padding: 12px;
-      background: #fff3cd;
-      border: 1px solid #ffeeba;
-      border-radius: 4px;
-      color: #856404;
+    .note {
+      font-size: 12px;
+      color: #666;
+      margin-top: 15px;
     }
     .footer {
       position: fixed;
@@ -59,76 +36,31 @@
 <body>
 
 <div class="container">
-  <div id="error" class="error">Invalid credentials (Demo only)</div>
+  <h2>Swagger UI Injection Demo</h2>
 
-  <h2 style="text-align:center;">Login Demo</h2>
+  <!-- Injected content will appear here -->
+  <div id="injected"></div>
 
-  <form onsubmit="return fakeLogin()">
-    <label>Username</label>
-    <input type="text" id="username" required>
-
-    <label>Password</label>
-    <input type="password" id="password" required>
-
-    <button type="submit">Login</button>
-  </form>
-
-  <!-- Simulated injected Swagger content -->
-  <div id="injected" class="injected-content">
-    ⚠ Demo: Injected Swagger UI content would appear here
-  </div>
-
-  <p style="font-size:12px;color:#666;margin-top:15px;">
-    ⚠ This is a safe demo. No credentials are stored or transmitted.
+  <p class="note">
+    ⚠ This page simulates how Swagger UI renders attacker‑controlled content from a remote config.json file.
   </p>
 </div>
 
 <div class="footer">
-  TheeHerbie
+  Theeherbie/.vetritec
 </div>
-
+  
 <script>
-  // Fake login handler
-  function fakeLogin() {
-    const u = document.getElementById("username").value;
-    const p = document.getElementById("password").value;
-
-    if (u === "admin" && p === "admin") {
-      alert("✅ Login successful (Demo)");
-      renderInjectedContent(true);
-    } else {
-      document.getElementById("error").style.display = "block";
-      renderInjectedContent(false);
-    }
-    return false;
-  }
-
-  // Simulate rendering injected Swagger/OpenAPI JSON
-  function renderInjectedContent(success) {
-    const div = document.getElementById("injected");
-    if(success){
-      div.innerHTML = "<b>✔ Example injected content:</b> Loaded OpenAPI endpoints:<ul>" +
-        "<li>/coord_trans - translate 3D coordinates</li>" +
-        "<li>/magephem - compute magnetic ephemeris</li></ul>" +
-        "<i>(Simulated configUrl JSON injection)</i>";
-      div.style.background = "#d4edda";
-      div.style.borderColor = "#c3e6cb";
-      div.style.color = "#155724";
-    } else {
-      div.innerHTML = "⚠ Simulated injected content: Invalid login attempt";
-      div.style.background = "#fff3cd";
-      div.style.borderColor = "#ffeeba";
-      div.style.color = "#856404";
-    }
-  }
-
-  // Optional: simulate external JSON injection safely
-  function simulateConfigInjection() {
-    const div = document.getElementById("injected");
-    div.innerHTML += "<br><i>⚡ Loaded JSON endpoints safely (demo)</i>";
-  }
-
-  simulateConfigInjection();
+  fetch("config.json")
+    .then(response => response.json())
+    .then(data => {
+      document.getElementById("injected").innerHTML =
+        data.info.description;
+    })
+    .catch(err => {
+      document.getElementById("injected").innerHTML =
+        "<p style='color:red;'>Failed to load config.json</p>";
+    });
 </script>
 
 </body>
